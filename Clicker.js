@@ -9,7 +9,7 @@
       document.getElementById('hide').style.visibility = 'hidden';
       document.getElementById('saved').style.display = 'none';
       document.getElementById('show').style.visibility = 'hidden';
-      document.getElementById('rainbowMouse').style.width = '25%';
+      document.getElementById('rainbowMouse').style.width = '50%';
       document.getElementById('rainbowMouse').style.height = 'auto';
       clickerInterval;
       if(localStorage.getItem("clickSave") != undefined){
