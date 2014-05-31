@@ -37,7 +37,7 @@
         keys.push(e.keyCode);
         if(keys.toString().indexOf(konami) >= 0){
           autoClicker += 5000;
-          setTimeout(function(){autoClicker -= 5000}, 5000);
+          //setTimeout(function(){autoClicker -= 5000}, 5000);
       
           keys = [];
         }
