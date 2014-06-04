@@ -2,14 +2,16 @@
   var autoClicker;
   var clicks;
   var repeat;
+  var onPage = "main";
     
   window.onLoad=init();
     
     function init(){
-      document.getElementById('hide').style.visibility = 'hidden'; // Hides the display before things are done loading. It doesn't work :(
+      document.getElementById('main').style.visibility = 'hidden'; // Hides the display before things are done loading. It doesn't work :(
       document.getElementById('saved').style.display = 'none'; // Hides the "saved!" text
       document.getElementById('rainbowMouse').style.width = '10%'; // Adjusts size of gif 
       document.getElementById('rainbowMouse').style.height = 'auto'; 
+      $(".shop").each(function(){$(this).hide()});
       clickerInterval;                                              // Initializes the autoClicker timer
       if(localStorage.getItem("clickSave") != undefined){           // Load save if there is any
         clicks = parseInt(localStorage.getItem("clickSave"));
@@ -47,7 +49,7 @@
     function unload(){                                              // Called when PSoD is clicked.
       var lastExit = (new Date().getTime()).toString();
       localStorage.setItem("lastExit", lastExit);
-      document.getElementById("hide").style.display = "none";
+      document.getElementById("main").style.display = "none";
     }
   
     function getKey(e){                                                   // Called when "e" is pressed
@@ -58,6 +60,12 @@
       if(code==69){
         clicks += 1 * multiplier;
         update();
+      }
+    }
+    
+    function gotoPage(page){
+      for(var i=0; i<10; i++){
+      document.getElementsByClassName("main")[i].style.display = "none";
       }
     }
   
@@ -112,7 +120,7 @@
   }
   
   function update(){                                                      // Display updater. Called every second after autoclicker
-  document.getElementById("demo").innerHTML = "Clicks: " + clicks + " | Multiplier: " + multiplier + " | Autoclickers: " + autoClicker; //Clicks display
+  document.getElementById("mainInfo").innerHTML = "Clicks: " + clicks + " | Multiplier: " + multiplier + " | Autoclickers: " + autoClicker; //Clicks display
   document.getElementById("multiplier").innerHTML="Upgrade [" + multiplier * multiplier * 10 + " clicks]"; //Multiplier Price
   document.getElementById("auto").innerHTML="Auto Clicker [" + (autoClicker * autoClicker * 50 + 50) + " clicks]"; //Autoclick Price
   }
