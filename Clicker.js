@@ -11,7 +11,7 @@
       document.getElementById('saved').style.display = 'none'; // Hides the "saved!" text
       document.getElementById('rainbowMouse').style.width = '10%'; // Adjusts size of gif 
       document.getElementById('rainbowMouse').style.height = 'auto'; 
-      $(".shop").each(function(){$(this).hide()});
+    //  $(".shop").each(function(){$(this).hide()});
       clickerInterval;                                              // Initializes the autoClicker timer
       if(localStorage.getItem("clickSave") != undefined){           // Load save if there is any
         clicks = parseInt(localStorage.getItem("clickSave"));
@@ -33,7 +33,7 @@
       }
       document.getElementById('show').style.visibility = 'visible';   // Shows the "show" button. idk
       
-      var keys = [];                                                  // Konami Code stuff
+      /*var keys = [];                                                  // Konami Code stuff
       var konami = '38,38,40,40,37,39,37,39,66,65';
       $(document).keyDown(function(e){
         keys.push(e.keyCode);
@@ -43,7 +43,7 @@
       
           keys = [];
         }
-      });
+      }); */
     }
     
     function unload(){                                              // Called when PSoD is clicked.
@@ -71,6 +71,7 @@
       for(var i=0; i<20; i++){
         document.getElementsByClassName(page)[i].style.display = "block";
       }
+      $(page).each(function(){$(this).show()});
     }
   
   function clicked(){                                                       // Called when "up" is clicked
