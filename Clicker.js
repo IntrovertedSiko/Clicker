@@ -71,7 +71,7 @@
       for(var i=0; i<20; i++){
         document.getElementsByClassName(page)[i].style.display = "block";
       }
-      $(page).each(function(){$(this).show()});
+      $(page).each(function(){$(this).style.display="block"});
     }
   
   function clicked(){                                                       // Called when "up" is clicked
