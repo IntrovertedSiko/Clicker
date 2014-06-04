@@ -64,8 +64,12 @@
     }
     
     function gotoPage(page){
-      for(var i=0; i<10; i++){
+      for(var i=0; i<20; i++){
       document.getElementsByClassName("main")[i].style.display = "none";
+      document.getElementsByClassName("shop")[i].style.display = "none";
+      }
+      for(var i=0; i<20; i++){
+        document.getElementsByClassName(page)[i].style.display = "block";
       }
     }
   
