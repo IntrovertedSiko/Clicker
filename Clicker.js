@@ -64,14 +64,9 @@
     }
     
     function gotoPage(page){
-      for(var i=0; i<20; i++){
-      document.getElementsByClassName("main")[i].style.display = "none";
-      document.getElementsByClassName("shop")[i].style.display = "none";
-      }
-      for(var i=0; i<20; i++){
-        document.getElementsByClassName(page)[i].style.display = "block";
-      }
-      $(page).each(function(){$(this).style.display="block"});
+      document.getElementById("main").style.display = "none";
+       document.getElementById("store").style.display = "none";
+        document.getElementById(page).style.display = "block";
     }
   
   function clicked(){                                                       // Called when "up" is clicked
