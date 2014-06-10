@@ -89,6 +89,7 @@
     localStorage.removeItem("clickSave");
     localStorage.removeItem("autoclickSave");
     localStorage.removeItem("multiplierSave");
+    localStorage.removeItem("printerSave");
     update();
   }
     
@@ -134,7 +135,7 @@
    localStorage.setItem("clickSave", clicks.toString());                  // ... it saves
     localStorage.setItem("autoclickSave", autoClicker.toString());
     localStorage.setItem("multiplierSave", multiplier.toString());
-    localStorage.setItem("printerSave", printer.toString());
+    localStorage.setItem("printerSave", printers.toString());
     document.getElementById("saved").style.display = "block";
     $("#saved").fadeOut(1000);
   }
