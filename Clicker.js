@@ -1,14 +1,15 @@
   var multiplier;
   var autoClicker;
   var clicks;
-  var printers = 0;
-  var printDelay = (Math.floor(Math.random()* 10) + 1) + 1;
+  var printers;
+  var printDelay = (Math.floor(Math.random()* 600) + 1) + 300;
   var repeat;
   var onPage = "main";
     
   window.onLoad=init();
     
     function init(){
+      printers = 0;
       document.getElementById('main').style.visibility = 'hidden'; // Hides the display before things are done loading. It doesn't work :(
       document.getElementById('saved').style.display = 'none'; // Hides the "saved!" text
       document.getElementById('rainbowMouse').style.width = '10%'; // Adjusts size of gif 
@@ -125,7 +126,7 @@
      printDelay--;
    }else{
      autoClicker++;
-     printDelay = (Math.floor(Math.random()* 10) + 1) + 1;
+     printDelay = (Math.floor(Math.random()* 600) + 1) + 300;
    }
   }
   
