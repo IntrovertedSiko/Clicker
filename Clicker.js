@@ -1,6 +1,8 @@
   var multiplier;
   var autoClicker;
   var clicks;
+  var printers;
+  var printDelay = (Math.floor(Math.random()* 10) + 1) + 1;
   var repeat;
   var onPage = "main";
     
@@ -17,9 +19,10 @@
         clicks = parseInt(localStorage.getItem("clickSave"));
         multiplier = parseInt(localStorage.getItem("multiplierSave"));
         autoClicker = parseInt(localStorage.getItem("autoclickSave"));
+        printers = parseInt(localStorage.getItem("printerSave"));
         update();
       } else {                                                        // Sets variables if no save found
-        clicks = autoClicker = 0;
+        clicks = autoClicker = printers = 0;
         multiplier = 1;
       }
       if(localStorage.getItem("lastExit") != undefined){              // Calculates PSoD time if found
@@ -106,24 +109,42 @@
     }
   }
   
-  function autoClicked(){                                                 // Called every second
+  function buyPrinter(){
+    if(clicks >= 10000000 && printers < 1){
+      clicks -= 10000000;
+      printers += 1;
+      update();
+    }
+  }
+  
+  function secondTimer(){                                                 // Called every second
    clicks += autoClicker;                                                 // Adds amount of autoClickers to clicks
-    update();
+   update();
+   
+   if(printDelay > 0){
+     printDelay--;
+   }else{
+     autoClicker++;
+     printDelay = (Math.floor(Math.random()* 10) + 1) + 1;
+   }
   }
   
   function save(){                                                        // Called when "save" is clicked
    localStorage.setItem("clickSave", clicks.toString());                  // ... it saves
     localStorage.setItem("autoclickSave", autoClicker.toString());
     localStorage.setItem("multiplierSave", multiplier.toString());
+    localStorage.setItem("printerSave", printer.toString());
     document.getElementById("saved").style.display = "block";
     $("#saved").fadeOut(1000);
   }
   
   function update(){                                                      // Display updater. Called every second after autoclicker
-  document.getElementById("mainInfo").innerHTML = "Clicks: " + clicks + " | Multiplier: " + multiplier + " | Autoclickers: " + autoClicker; //Clicks display
+  document.getElementById("mainInfo").innerHTML = "Clicks: " + clicks + " | Multiplier: " + multiplier + " | Autoclickers: " + autoClicker + " | Printer: " + printers; //Clicks display
   document.getElementById("multiplier").innerHTML="Upgrade [" + multiplier * multiplier * 10 + " clicks]"; //Multiplier Price
   document.getElementById("auto").innerHTML="Auto Clicker [" + (autoClicker * autoClicker * 50 + 50) + " clicks]"; //Autoclick Price
+//  document.getElementById("print").innerHTML="Clicker Printer [10000000 clicks]"
   }
   
-  var clickerInterval = setInterval(autoClicked, 1000);                   // Timer for autoclicker. 1 Second
+  
+  var clickerInterval = setInterval(secondTimer, 1000);                   // Timer for autoclicker. 1 Second
   setInterval(save, 60000);                                              // Autosaver. 1 minute
