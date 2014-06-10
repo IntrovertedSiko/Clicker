@@ -122,7 +122,7 @@
    clicks += autoClicker;                                                 // Adds amount of autoClickers to clicks
    update();
    
-   if(printDelay > 0){
+   if(printDelay > 0 && printers > 0){
      printDelay--;
    }else{
      autoClicker++;
@@ -145,7 +145,6 @@
   document.getElementById("auto").innerHTML="Auto Clicker [" + (autoClicker * autoClicker * 50 + 50) + " clicks]"; //Autoclick Price
 //  document.getElementById("print").innerHTML="Clicker Printer [10000000 clicks]"
   }
-  
   
   var clickerInterval = setInterval(secondTimer, 1000);                   // Timer for autoclicker. 1 Second
   setInterval(save, 60000);                                              // Autosaver. 1 minute
