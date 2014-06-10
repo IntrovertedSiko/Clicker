@@ -1,7 +1,7 @@
   var multiplier;
   var autoClicker;
   var clicks;
-  var printers;
+  var printers = 0;
   var printDelay = (Math.floor(Math.random()* 10) + 1) + 1;
   var repeat;
   var onPage = "main";
