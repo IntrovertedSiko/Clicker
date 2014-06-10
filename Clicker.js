@@ -2,7 +2,7 @@
   var autoClicker;
   var clicks;
   var printers;
-  var printDelay = (Math.floor(Math.random()* 600) + 1) + 300;
+  var printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
   var repeat;
   var onPage = "main";
     
@@ -127,7 +127,7 @@
      printDelay--;
    }else{
      autoClicker++;
-     printDelay = (Math.floor(Math.random()* 600) + 1) + 300;
+     printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
    }
   }
   
@@ -142,6 +142,7 @@
   
   function update(){                                                      // Display updater. Called every second after autoclicker
   document.getElementById("mainInfo").innerHTML = "Clicks: " + clicks + " | Multiplier: " + multiplier + " | Autoclickers: " + autoClicker + " | Printer: " + printers; //Clicks display
+  document.getElementById("mainn").innerHTML = "Printers: " + printers + " | Delay: " + printDelay;
   document.getElementById("multiplier").innerHTML="Upgrade [" + multiplier * multiplier * 10 + " clicks]"; //Multiplier Price
   document.getElementById("auto").innerHTML="Auto Clicker [" + (autoClicker * autoClicker * 50 + 50) + " clicks]"; //Autoclick Price
 //  document.getElementById("print").innerHTML="Clicker Printer [10000000 clicks]"
