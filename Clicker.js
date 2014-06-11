@@ -4,6 +4,7 @@
   var clickDelay; // Delay b/w clicks. Mainly to encourage clicking
   var lastClickDelay;
   var maxClickDelay;
+  var clickPowerTime;
   
   var printers;
   var printDelay;
@@ -93,8 +94,10 @@
   
   function clicked(){                                                       // Called when "up" is clicked
     clicks += 1 * multiplier;                                               // Adds clicks
-    --clickDelay;
-    lastClickDelay = 5;
+    if(!clickPowerTime){
+      --clickDelay;
+      lastClickDelay = 5;
+    }
     update();
   }
   
@@ -141,14 +144,20 @@
   
   function secondTimer(){                                                 // Called every second
    clicks += autoClicker;                                                 // Adds amount of autoClickers to clicks
-   if(lastClickDelay > -1) --lastClickDelay;
-   if(lastClickDelay <= 0 && clickDelay <= maxClickDelay) ++clickDelay;
-   if(clickDelay <= 0) {
-     multiplier += 100;
-     setTimeout(function(){multiplier -= 100}, 3000)
+   if(!clickPowerTime){
+    if(lastClickDelay > 0) --lastClickDelay;
+    if(lastClickDelay <= 0 && clickDelay < maxClickDelay) ++clickDelay;
+    if(clickDelay <= 0) {
+      multiplier += 100;
+      clickPowerTime = true;
+      }
+    } else if(clickDelay < maxClickDelay){
+      clickDelay += 10;
+    } else if(clickDelay >= maxClickDelay){
+      clickPowerTme = false;
+      multiplier -= 100;
     }
-   update();
-
+    
    if(printDelay > 0 || printDelay == undefined){
      if(printers > 0){
        printDelay--;
@@ -163,6 +172,8 @@
      autoClicker++;
      printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
    }
+   
+   update();
   }
   
   function save(){                                                        // Called when "save" is clicked
