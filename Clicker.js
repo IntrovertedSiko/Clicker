@@ -141,7 +141,10 @@
    clicks += autoClicker;                                                 // Adds amount of autoClickers to clicks
    --lastClickDelay;
    if(lastClickDelay <= 0 && clickDelay <= maxClickDelay) ++clickDelay;
-   if(clickDelay <= 0) { multiplier += 100; setTimeout(function(){multiplier -= 100}, 3000)};
+   if(clickDelay <= 0) {
+     multiplier += 100;
+     setTimeout(function(){multiplier -= 100}, 3000)
+    }
    update();
 
    if(printDelay > 0 || printDelay == undefined){
