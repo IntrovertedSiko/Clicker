@@ -149,7 +149,7 @@
        printDelay--;
      }
      
-     hasPrinter();
+     checkHasPrinter();
      
      if(printDelay == undefined){
        printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
