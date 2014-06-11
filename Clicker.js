@@ -10,6 +10,7 @@
     
     function init(){
       printers = Number(0);
+      printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
       document.getElementById('main').style.visibility = 'hidden'; // Hides the display before things are done loading. It doesn't work :(
       document.getElementById('saved').style.display = 'none'; // Hides the "saved!" text
       document.getElementById('rainbowMouse').style.width = '10%'; // Adjusts size of gif 
@@ -124,8 +125,12 @@
    update();
    
    if(printDelay > 0 || printDelay == undefined){
-     if(printers < 0) printDelay--;
-     if(printDelay == undefined) printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
+     if(printers > 0){
+       printDelay--;
+     } 
+     if(printDelay == undefined){
+       printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
+     } 
    }else{
      autoClicker++;
      printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
