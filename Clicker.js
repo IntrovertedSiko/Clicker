@@ -54,12 +54,12 @@
       document.getElementById('show').style.visibility = 'visible';   // Shows the "show" button. idk
     }
     
-    $(window).konami({                                              // Konami!
+  /*  $(window).konami({                                              // Konami!
       cheat: function(){
         clicks += 1000;
       }
     });
-    
+    */ //Not working again
     function unload(){                                              // Called when PSoD is clicked.
       var lastExit = (new Date().getTime()).toString();
       localStorage.setItem("lastExit", lastExit);
