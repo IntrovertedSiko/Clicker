@@ -36,6 +36,7 @@
       }
       
       maxClickDelay = Number(100);
+      clickPower = Boolean(0);
       
       if(printers==undefined || printers==null || printers==NaN) printers = Number(0); // If no printers, then no printers. Mainly for v0.5
       if(printDelay==undefined || printDelay==null || printDelay==NaN) printDelay = (Math.floor(Math.random() * 600) + 1) + 300; // Pre-sets the delay for printer
@@ -94,7 +95,7 @@
   
   function clicked(){                                                       // Called when "up" is clicked
     clicks += 1 * multiplier;                                               // Adds clicks
-    if(!clickPowerTime){
+    if(!clickPowerTime && clickDelay > 0){
       --clickDelay;
       lastClickDelay = 5;
     }
@@ -149,12 +150,12 @@
     if(lastClickDelay <= 0 && clickDelay < maxClickDelay) ++clickDelay;
     if(clickDelay <= 0) {
       multiplier += 100;
-      clickPowerTime = true;
+      clickPowerTime = Boolean(1);
       }
     } else if(clickDelay < maxClickDelay){
       clickDelay += 10;
     } else if(clickDelay >= maxClickDelay){
-      clickPowerTime = false;
+      clickPowerTime = Boolean(0);
       multiplier -= 100;
     }
     
