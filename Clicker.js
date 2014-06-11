@@ -10,13 +10,10 @@
   var hasPrinter;
   
   var repeat;
-  var onPage = "main";
     
   window.onLoad=init();
     
     function init(){
-      printDelay = (Math.floor(Math.random() * 600) + 1) + 300; // Pre-sets the delay for printer
-      
       document.getElementById('main').style.visibility = 'hidden'; // Hides the display before things are done loading. It doesn't work :(
       document.getElementById('saved').style.display = 'none'; // Hides the "saved!" text
       document.getElementById('rainbowMouse').style.width = '10%'; // Adjusts size of gif 
@@ -38,8 +35,10 @@
       }
       
       if(printers==undefined || printers==null) printers = Number(0); // If no printers, then no printers. Mainly for v0.5
-      if(lastClickDelay==undefined || lastClickDelay==null) lastClickDelay = 5;
-    
+      if(printDelay==undefined || printDelay==null) printDelay = (Math.floor(Math.random() * 600) + 1) + 300; // Pre-sets the delay for printer
+      if(lastClickDelay==undefined || lastClickDelay==null) lastClickDelay = 5; // If no click delay, then click delay = 5; mainly for v0.6
+      if(clickDelay==undefined || clickDelay==null) clickDelay = maxClickDelay;
+      
       if(localStorage.getItem("lastExit") != undefined){              // Calculates PSoD time if found
         var lastExit = parseInt(localStorage.getItem("lastExit"));
         var currentTime = new Date().getTime();
@@ -66,7 +65,11 @@
     }
   
     function hasPrinter(){
-      if(printers > 0) { hasPrinter = "yes" } else { hasPrinter = "no" };
+      if(printers > 0){
+          hasPrinter = "yes" 
+        } else {
+          hasPrinter = "no"
+        }
     }
   
     function getKey(e){                                                   // Called when "e" is pressed
