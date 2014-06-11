@@ -1,6 +1,9 @@
-  var multiplier;
-  var autoClicker;
-  var clicks;
+  var multiplier; // Click Multiplier
+  var autoClicker;  // AutoClickers...
+  var clicks; // Main variable. Clicks are masterrace
+  var clickDelay; // Delay b/w clicks. Mainly to encourage clicking
+  var lastClickDelay;
+  var maxClickDelay = Number(100);
   
   var printers;
   var printDelay;
@@ -12,24 +15,31 @@
   window.onLoad=init();
     
     function init(){
-      printers = Number(0);
-      printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
+      printDelay = (Math.floor(Math.random() * 600) + 1) + 300; // Pre-sets the delay for printer
+      
       document.getElementById('main').style.visibility = 'hidden'; // Hides the display before things are done loading. It doesn't work :(
       document.getElementById('saved').style.display = 'none'; // Hides the "saved!" text
       document.getElementById('rainbowMouse').style.width = '10%'; // Adjusts size of gif 
       document.getElementById('rainbowMouse').style.height = 'auto'; 
     //  $(".shop").each(function(){$(this).hide()});
       clickerInterval;                                              // Initializes the autoClicker timer
+      
       if(localStorage.getItem("clickSave") != undefined){           // Load save if there is any
         clicks = parseInt(localStorage.getItem("clickSave"));
         multiplier = parseInt(localStorage.getItem("multiplierSave"));
         autoClicker = parseInt(localStorage.getItem("autoclickSave"));
-        //printers = parseInt(localStorage.getItem("printerSave"));
+        printers = parseInt(localStorage.getItem("printerSave"));
+        printDelay = parseInt(localStorage.getItem("printDelaySave"));
+        clickDelay = parseInt(localStorage.getItem("clickDelaySave"));
         update();
       } else {                                                        // Sets variables if no save found
         clicks = autoClicker = printers = Number(0);
         multiplier = Number(1);
       }
+      
+      if(printers==undefined || printers==null) printers = Number(0); // If no printers, then no printers. Mainly for v0.5
+      if(lastClickDelay==undefined || lastClickDelay==null) lastClickDelay = 5;
+    
       if(localStorage.getItem("lastExit") != undefined){              // Calculates PSoD time if found
         var lastExit = parseInt(localStorage.getItem("lastExit"));
         var currentTime = new Date().getTime();
@@ -39,23 +49,11 @@
         localStorage.removeItem("lastExit");
         document.getElementById("PSoD").innerHTML = "You gained " + (timeOut * multiplier) + " clicks while you were gone!";
       }
-      if(printers > 0) {hasPrinter = "yes"} else { hasPrinter = "no" };
+      
       document.getElementById('show').style.visibility = 'visible';   // Shows the "show" button. idk
-      
-      /*var keys = [];                                                  // Konami Code stuff
-      var konami = '38,38,40,40,37,39,37,39,66,65';
-      $(document).keyDown(function(e){
-        keys.push(e.keyCode);
-        if(keys.toString().indexOf(konami) > 0){
-          clicks += 5000;
-          //setTimeout(function(){autoClicker -= 5000}, 5000);
-      
-          keys = [];
-        }
-      }); */
     }
     
-    $(window).konami({
+    $(window).konami({                                              // Konami!
       cheat: function(){
         clicks += 1000;
       }
@@ -65,6 +63,10 @@
       var lastExit = (new Date().getTime()).toString();
       localStorage.setItem("lastExit", lastExit);
       document.getElementById("main").style.display = "none";
+    }
+  
+    function hasPrinter(){
+      if(printers > 0) { hasPrinter = "yes" } else { hasPrinter = "no" };
     }
   
     function getKey(e){                                                   // Called when "e" is pressed
@@ -86,6 +88,8 @@
   
   function clicked(){                                                       // Called when "up" is clicked
     clicks += 1 * multiplier;                                               // Adds clicks
+    --clickDelay;
+    lastClickDelay = 5;
     update();
   }
   
@@ -132,12 +136,18 @@
   
   function secondTimer(){                                                 // Called every second
    clicks += autoClicker;                                                 // Adds amount of autoClickers to clicks
+   --lastClickDelay;
+   if(lastClickDelay <= 0 && clickDelay <= maxClickDelay) ++clickDelay;
+   if(clickDelay <= 0) { multiplier += 100; setTimeout(function(){multiplier -= 100}, 3000)};
    update();
-   
+
    if(printDelay > 0 || printDelay == undefined){
      if(printers > 0){
        printDelay--;
-     } 
+     }
+     
+     hasPrinter();
+     
      if(printDelay == undefined){
        printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
      } 
@@ -152,6 +162,8 @@
     localStorage.setItem("autoclickSave", autoClicker.toString());
     localStorage.setItem("multiplierSave", multiplier.toString());
     localStorage.setItem("printerSave", printers.toString());
+    localStorage.setItem("printDelaySave", printDelay.toString());
+    localStorage.setItem("clickDelaySave", clickDelay.toString());
     document.getElementById("saved").style.display = "block";
     $("#saved").fadeOut(1000);
   }
