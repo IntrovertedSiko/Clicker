@@ -3,7 +3,7 @@
   var clicks; // Main variable. Clicks are masterrace
   var clickDelay; // Delay b/w clicks. Mainly to encourage clicking
   var lastClickDelay;
-  var maxClickDelay = Number(100);
+  var maxClickDelay;
   
   var printers;
   var printDelay;
@@ -33,6 +33,8 @@
         clicks = autoClicker = printers = Number(0);
         multiplier = Number(1);
       }
+      
+      maxClickDelay = Number(100);
       
       if(printers==undefined || printers==null || printers==NaN) printers = Number(0); // If no printers, then no printers. Mainly for v0.5
       if(printDelay==undefined || printDelay==null || printDelay==NaN) printDelay = (Math.floor(Math.random() * 600) + 1) + 300; // Pre-sets the delay for printer
@@ -139,7 +141,7 @@
   
   function secondTimer(){                                                 // Called every second
    clicks += autoClicker;                                                 // Adds amount of autoClickers to clicks
-   --lastClickDelay;
+   if(lastClickDelay > -1) --lastClickDelay;
    if(lastClickDelay <= 0 && clickDelay <= maxClickDelay) ++clickDelay;
    if(clickDelay <= 0) {
      multiplier += 100;
