@@ -123,8 +123,8 @@
    clicks += autoClicker;                                                 // Adds amount of autoClickers to clicks
    update();
    
-   if(printDelay > 0 && printers > 0){
-     printDelay--;
+   if(printDelay > 0){
+     if(printers < 0) printDelay--;
    }else{
      autoClicker++;
      printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
