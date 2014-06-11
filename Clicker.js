@@ -34,10 +34,10 @@
         multiplier = Number(1);
       }
       
-      if(printers==undefined || printers==null) printers = Number(0); // If no printers, then no printers. Mainly for v0.5
-      if(printDelay==undefined || printDelay==null) printDelay = (Math.floor(Math.random() * 600) + 1) + 300; // Pre-sets the delay for printer
-      if(lastClickDelay==undefined || lastClickDelay==null) lastClickDelay = 5; // If no click delay, then click delay = 5; mainly for v0.6
-      if(clickDelay==undefined || clickDelay==null) clickDelay = maxClickDelay;
+      if(printers==undefined || printers==null || printers==NaN) printers = Number(0); // If no printers, then no printers. Mainly for v0.5
+      if(printDelay==undefined || printDelay==null || printDelay==NaN) printDelay = (Math.floor(Math.random() * 600) + 1) + 300; // Pre-sets the delay for printer
+      if(lastClickDelay==undefined || lastClickDelay==null || lastClickDelay==NaN) lastClickDelay = 5; // If no click delay, then click delay = 5; mainly for v0.6
+      if(clickDelay==undefined || clickDelay==null || clickDelay==NaN) clickDelay = maxClickDelay;
       
       if(localStorage.getItem("lastExit") != undefined){              // Calculates PSoD time if found
         var lastExit = parseInt(localStorage.getItem("lastExit"));
@@ -64,7 +64,7 @@
       document.getElementById("main").style.display = "none";
     }
   
-    function hasPrinter(){
+    function checkHasPrinter(){
       if(printers > 0){
           hasPrinter = "yes" 
         } else {
@@ -173,7 +173,7 @@
   
   function update(){                                                      // Display updater. Called every second after autoclicker
   document.getElementById("mainInfo").innerHTML = "Clicks: " + clicks + " | Multiplier: " + multiplier + " | Autoclickers: " + autoClicker + " | Printer: " + hasPrinter; //Clicks display
-  document.getElementById("mainn").innerHTML = "Printers: " + printers + " | Delay: " + printDelay;
+  document.getElementById("mainn").innerHTML = "Printers: " + printers + " | Delay: " + printDelay + " | ClickDelay: " + clickDelay + " | lastClickDelay: " + lastClickDelay;
   document.getElementById("multiplier").innerHTML="Upgrade [" + multiplier * multiplier * 10 + " clicks]"; //Multiplier Price
   document.getElementById("auto").innerHTML="Auto Clicker [" + (autoClicker * autoClicker * 50 + 50) + " clicks]"; //Autoclick Price
   document.getElementById("print").innerHTML="Clicker Printer [10000000 clicks]"
