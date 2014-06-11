@@ -23,8 +23,8 @@
         //printers = parseInt(localStorage.getItem("printerSave"));
         update();
       } else {                                                        // Sets variables if no save found
-        clicks = autoClicker = printers = 0;
-        multiplier = 1;
+        clicks = autoClicker = printers = Number(0);
+        multiplier = Number(1);
       }
       if(localStorage.getItem("lastExit") != undefined){              // Calculates PSoD time if found
         var lastExit = parseInt(localStorage.getItem("lastExit"));
@@ -124,10 +124,8 @@
    update();
    
    if(printDelay > 0 || printDelay == undefined){
-     if(printers < 0)
-     {
-       printDelay--;
-     }
+     if(printers < 0) printDelay--;
+     if(printDelay == undefined) printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
    }else{
      autoClicker++;
      printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
