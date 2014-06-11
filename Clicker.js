@@ -154,7 +154,7 @@
     } else if(clickDelay < maxClickDelay){
       clickDelay += 10;
     } else if(clickDelay >= maxClickDelay){
-      clickPowerTme = false;
+      clickPowerTime = false;
       multiplier -= 100;
     }
     
