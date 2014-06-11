@@ -124,7 +124,10 @@
    update();
    
    if(printDelay > 0 || printDelay == undefined){
-     if(printers < 0) printDelay--;
+     if(printers < 0)
+     {
+       printDelay--
+     };
    }else{
      autoClicker++;
      printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
