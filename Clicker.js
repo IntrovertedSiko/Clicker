@@ -1,8 +1,11 @@
   var multiplier;
   var autoClicker;
   var clicks;
+  
   var printers;
   var printDelay;
+  var hasPrinter;
+  
   var repeat;
   var onPage = "main";
     
@@ -36,6 +39,7 @@
         localStorage.removeItem("lastExit");
         document.getElementById("PSoD").innerHTML = "You gained " + (timeOut * multiplier) + " clicks while you were gone!";
       }
+      if(printers > 0) {hasPrinter = "yes"} else { hasPrinter = "no" };
       document.getElementById('show').style.visibility = 'visible';   // Shows the "show" button. idk
       
       /*var keys = [];                                                  // Konami Code stuff
@@ -50,6 +54,12 @@
         }
       }); */
     }
+    
+    $(window).konami({
+      cheat: function(){
+        clicks += 1000;
+      }
+    });
     
     function unload(){                                              // Called when PSoD is clicked.
       var lastExit = (new Date().getTime()).toString();
@@ -147,11 +157,11 @@
   }
   
   function update(){                                                      // Display updater. Called every second after autoclicker
-  document.getElementById("mainInfo").innerHTML = "Clicks: " + clicks + " | Multiplier: " + multiplier + " | Autoclickers: " + autoClicker + " | Printer: " + printers; //Clicks display
+  document.getElementById("mainInfo").innerHTML = "Clicks: " + clicks + " | Multiplier: " + multiplier + " | Autoclickers: " + autoClicker + " | Printer: " + hasPrinter; //Clicks display
   document.getElementById("mainn").innerHTML = "Printers: " + printers + " | Delay: " + printDelay;
   document.getElementById("multiplier").innerHTML="Upgrade [" + multiplier * multiplier * 10 + " clicks]"; //Multiplier Price
   document.getElementById("auto").innerHTML="Auto Clicker [" + (autoClicker * autoClicker * 50 + 50) + " clicks]"; //Autoclick Price
-//  document.getElementById("print").innerHTML="Clicker Printer [10000000 clicks]"
+  document.getElementById("print").innerHTML="Clicker Printer [10000000 clicks]"
   }
   
   var clickerInterval = setInterval(secondTimer, 1000);                   // Timer for autoclicker. 1 Second
