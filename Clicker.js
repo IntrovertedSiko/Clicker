@@ -2,7 +2,7 @@
   var autoClicker;
   var clicks;
   var printers;
-  var printDelay = (Math.floor(Math.random() * 600) + 1) + 300;
+  var printDelay;
   var repeat;
   var onPage = "main";
     
@@ -20,7 +20,7 @@
         clicks = parseInt(localStorage.getItem("clickSave"));
         multiplier = parseInt(localStorage.getItem("multiplierSave"));
         autoClicker = parseInt(localStorage.getItem("autoclickSave"));
-        printers = parseInt(localStorage.getItem("printerSave"));
+        //printers = parseInt(localStorage.getItem("printerSave"));
         update();
       } else {                                                        // Sets variables if no save found
         clicks = autoClicker = printers = 0;
@@ -123,7 +123,7 @@
    clicks += autoClicker;                                                 // Adds amount of autoClickers to clicks
    update();
    
-   if(printDelay > 0){
+   if(printDelay > 0 || printDelay == undefined){
      if(printers < 0) printDelay--;
    }else{
      autoClicker++;
