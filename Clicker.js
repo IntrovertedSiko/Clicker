@@ -198,7 +198,7 @@
   
   function update(){                                                      // Display updater. Called every second after autoclicker
   document.getElementById("mainInfo").innerHTML = "Clicks: " + clicks + " | Multiplier: " + multiplier + " | Autoclickers: " + autoClicker + " | Printer: " + hasPrinter; //Clicks display
-  document.getElementById("mainn").innerHTML = "Printers: " + printers + " | Delay: " + printDelay + " | ClickDelay: " + clickDelay + " | lastClickDelay: " + lastClickDelay;
+  document.getElementById("mainn").innerHTML = "ClickDelay: " + clickDelay + " | lastClickDelay: " + lastClickDelay;
   document.getElementById("multiplier").innerHTML="Upgrade [" + multiplier * multiplier * 10 + " clicks]"; //Multiplier Price
   document.getElementById("auto").innerHTML="Auto Clicker [" + (autoClicker * autoClicker * 50 + 50) + " clicks]"; //Autoclick Price
   document.getElementById("print").innerHTML="Clicker Printer [10000000 clicks]"
