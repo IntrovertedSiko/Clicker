@@ -151,7 +151,8 @@
     if(clickDelay <= 0) {
       multiplier += 100;
       clickPowerTime = Boolean(1);
-      document.body.style.background="#FFFF00 url('http://media.giphy.com/media/dTrqeJLjTLBiU/giphy.gif') no-repeat";
+      document.body.style.background="#FFFFFF url('http://media.giphy.com/media/dTrqeJLjTLBiU/giphy.gif') no-repeat fixed top";
+      document.body.style.background.size="cover";
       }
     } else if(clickDelay < maxClickDelay){
       clickDelay += 10;
