@@ -29,6 +29,7 @@
         printers = parseInt(localStorage.getItem("printerSave"));
         printDelay = parseInt(localStorage.getItem("printDelaySave"));
         clickDelay = parseInt(localStorage.getItem("clickDelaySave"));
+        clickPower = ((localStorage.getItem("clickPowerSave")) === 'true');
         update();
       } else {                                                        // Sets variables if no save found
         clicks = autoClicker = printers = Number(0);
@@ -36,8 +37,11 @@
       }
       
       maxClickDelay = Number(100);
-      clickPower = Boolean(0);
       
+      if(clickPower){
+        multiplier -= 100;
+        clickPower = Boolean(0);
+      }
       if(printers==undefined || printers==null || printers==NaN) printers = Number(0); // If no printers, then no printers. Mainly for v0.5
       if(printDelay==undefined || printDelay==null || printDelay==NaN) printDelay = (Math.floor(Math.random() * 600) + 1) + 300; // Pre-sets the delay for printer
       if(lastClickDelay==undefined || lastClickDelay==null || lastClickDelay==NaN) lastClickDelay = 5; // If no click delay, then click delay = 5; mainly for v0.6
@@ -149,7 +153,7 @@
     if(lastClickDelay > 0) --lastClickDelay;
     if(lastClickDelay <= 0 && clickDelay < maxClickDelay) ++clickDelay;
     if(clickDelay <= 0) {
-      multiplier += 100;
+      multiplier *= 100;
       clickPowerTime = Boolean(1);
       document.body.style.background="#FFFFFF url('http://media.giphy.com/media/dTrqeJLjTLBiU/giphy.gif') no-repeat center center fixed";
       document.body.style.backgroundSize="cover";
@@ -158,7 +162,7 @@
       clickDelay += 10;
     } else if(clickDelay >= maxClickDelay){
       clickPowerTime = Boolean(0);
-      multiplier -= 100;
+      multiplier /= 100;
       document.body.style.background="#FFFFFF";
     }
     
@@ -187,6 +191,7 @@
     localStorage.setItem("printerSave", printers.toString());
     localStorage.setItem("printDelaySave", printDelay.toString());
     localStorage.setItem("clickDelaySave", clickDelay.toString());
+    localStorage.setItem("clickPowerSave", clickPower.toString());
     document.getElementById("saved").style.display = "block";
     $("#saved").fadeOut(1000);
   }
